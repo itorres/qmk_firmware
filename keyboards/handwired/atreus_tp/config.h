@@ -93,4 +93,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define TAPPING_TERM 400
 
+#define NO_DEBUG
+#define NO_PRINT
+#define NO_ACTION_MACRO
+
 #endif
