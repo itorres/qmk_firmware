@@ -81,8 +81,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define PS2_MOUSE_INVERT_Y
 #define PS2_MOUSE_INVERT_H
 #define PS2_MOUSE_INVERT_V
-#define PS2_MOUSE_SCROLL_DIVISOR_V 2
-#define PS2_MOUSE_SCROLL_DIVISOR_H 2
+#define PS2_MOUSE_SCROLL_DIVISOR_H 1
+#define PS2_MOUSE_SCROLL_DIVISOR_V 1
 
 #define RGB_DI_PIN C6
 #define RGBLED_NUM 3
