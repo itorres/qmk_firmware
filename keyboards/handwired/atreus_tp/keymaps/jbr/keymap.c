@@ -17,7 +17,8 @@ enum {
   SINGLE_HOLD = 2,
   DOUBLE_TAP = 3,
   DOUBLE_HOLD = 4,
-  TRIPPLE_TAP = 5
+  TRIPPLE_TAP = 5,
+  ABORT = 99
 };
 
 typedef struct {
@@ -86,7 +87,13 @@ void td_sym_finished(qk_tap_dance_state_t *state, void *user_data) {
   xtap_state.state = cur_dance(state);
   switch (xtap_state.state) {
     case SINGLE_TAP:
-      set_oneshot_layer(SHIFT, ONESHOT_START);
+      if (layer_state_is(SYM)) {
+        layer_off(SYM);
+        xtap_state.state = ABORT;
+      }
+      else {
+        set_oneshot_layer(SHIFT, ONESHOT_START);
+      }
       break;
     case SINGLE_HOLD:
       layer_on(SHIFT);
@@ -105,7 +112,13 @@ void td_func_finished(qk_tap_dance_state_t *state, void *user_data) {
   xtap_state.state = cur_dance(state);
   switch (xtap_state.state) {
     case SINGLE_TAP:
-      set_oneshot_layer(SHIFT, ONESHOT_START);
+      if (layer_state_is(FUNC)) {
+        layer_off(FUNC);
+        xtap_state.state = ABORT;
+      }
+      else {
+        set_oneshot_layer(SHIFT, ONESHOT_START);
+      }
       break;
     case SINGLE_HOLD:
       layer_on(SHIFT);
