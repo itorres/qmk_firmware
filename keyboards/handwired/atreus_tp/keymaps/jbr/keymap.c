@@ -43,7 +43,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     {KC_EXLM,      KC_AT,        KC_HASH,  KC_DLR,   KC_PERC,    KC_TRNS,  KC_NONUS_BSLASH,  KC_7,     KC_8,  KC_9,   KC_PLUS},
     {KC_CIRC,      KC_AMPR,      KC_ASTR,  KC_LPRN,  KC_RPRN,    KC_TRNS,  KC_COLN,          KC_4,     KC_5,  KC_6,   KC_PEQL},
     {KC_LBRACKET,  KC_RBRACKET,  KC_LCBR,  KC_RCBR,  KC_SCOLON,  KC_TRNS,  KC_DOT,           KC_1,     KC_2,  KC_3,   KC_NO},
-    {TO(NORM),      KC_NO,        KC_TRNS,  KC_TRNS,  KC_TRNS,    KC_TRNS, KC_TRNS,          KC_BSPC,   KC_0,  KC_NO, KC_TRNS}
+    {TO(NORM), LGUI(LALT(KC_EJCT)), KC_TRNS,  KC_TRNS,  KC_TRNS,    KC_TRNS, KC_TRNS,          KC_BSPC,   KC_0,  KC_NO, KC_TRNS}
   },
   [FUNC] = {
     {BL_INC,   KC_HOME,  KC_UP,    KC_END,   KC_PGUP,  KC_TRNS,  KC_VOLU,  KC_F7,    KC_F8,    KC_F9,    KC_F10},
