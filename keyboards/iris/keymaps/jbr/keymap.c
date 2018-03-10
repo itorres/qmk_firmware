@@ -82,7 +82,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
         default_layer_set(layer_state);
         layer_state_set(layer_state);
-        // eeconfig_update_default_layer(layer_state);
+        eeconfig_update_default_layer(layer_state);
       }
       return false;
       break;
