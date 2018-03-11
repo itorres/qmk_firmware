@@ -29,7 +29,7 @@ enum iris_keycodes {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [MAC] = KC_KEYMAP(
    //,----+----+----+----+----+----.              ,----+----+----+----+----+----.
-      HOME,PGDN,PGUP,END ,MUTE,MPLY,               VOLU,VOLD,LEFT,DOWN,UP  ,RGHT,
+      HOME,PGDN,PGUP,END ,MUTE,MPLY,               VOLD,VOLU,LEFT,DOWN,UP  ,RGHT,
    //|----+----+----+----+----+----|              |----+----+----+----+----+----|
       TAB ,Q   ,W   ,E   ,R   ,T   ,               Y   ,U   ,I   ,O   ,P   ,MARG,
    //|----+----+----+----+----+----|              |----+----+----+----+----+----|
