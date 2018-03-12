@@ -37,7 +37,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
       NO  ,Z   ,X   ,C   ,V   ,B   ,OCTL,     OGUI,N   ,M   ,COMM,DOT ,SCLN,SLSH,
    //`----+----+----+--+-+----+----+----/    \----+----+----+----+----+----+----'
-                         OALT,ORAI,SPC ,        BSPC,OSFT,ENT
+                         OALT,OSFT,BSPC,        SPC ,ORAI,ENT
    //                   `----+----+----'       `----+----+----'
   ),
   [LINUX] = KC_KEYMAP(
@@ -63,7 +63,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
       GRV ,TILD,BSLS,PIPE,UNDS,LOM ,TRNS,     TRNS,NO  ,LCBR,RCBR,LBRC,RBRC,EQL ,
    //`----+----+----+--+-+----+----+----/    \----+----+----+----+----+----+----'
-                         TRNS,TRNS,NO  ,        DEL ,NO  ,NO
+                         TRNS,NO  ,DEL ,        NO  ,TRNS,NO
    //                   `----+----+----'       `----+----+----'
   )
 };
