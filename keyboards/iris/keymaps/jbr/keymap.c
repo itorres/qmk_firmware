@@ -75,9 +75,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    //,----+----+----+----+----+----.              ,----+----+----+----+----+----.
        NO ,EXLM, AT ,HASH, DLR,PERC,               CIRC,AMPR,ASTR,LPRN,RPRN, DEL,
    //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-       NO , 1  , 2  ,    , 4  , 5  ,                6  , 7  , 8  , 9  , 0  , NO ,
+       NO ,    ,    ,    ,    ,    ,                6  , 7  , 8  , 9  , 0  , NO ,
    //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-       NO , DQT,QUOT, GRV,TILD,PIPE,               PLUS,MINS, EQL,UNDS,BSLS, NO ,
+          , DQT,QUOT, GRV,TILD,PIPE,               PLUS,MINS, EQL,UNDS,BSLS,    ,
    //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
        NO , NO , NO , NO , NO , NO , NO ,      NO , NO , NO , NO , NO , NO , NO ,
    //`----+----+----+--+-+----+----+----/    \----+----+----+----+----+----+----'
@@ -88,9 +88,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    //,----+----+----+----+----+----.              ,----+----+----+----+----+----.
        NO ,EXLM, AT ,HASH, DLR,PERC,               CIRC,AMPR,ASTR,LPRN,RPRN, DEL,
    //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-       NO , 1  , 2  , 3  , 4  , 5  ,                6  , 7  ,    , 9  , 0  , NO ,
+       NO , 1  , 2  , 3  , 4  , 5  ,                   ,    ,    ,    ,    , NO ,
    //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-       NO , DQT,QUOT, GRV,TILD,PIPE,               PLUS,MINS, EQL,UNDS,BSLS, NO ,
+          , DQT,QUOT, GRV,TILD,PIPE,               PLUS,MINS, EQL,UNDS,BSLS,    ,
    //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
        NO , NO , NO , NO , NO , NO , NO ,      NO , NO , NO , NO , NO , NO , NO ,
    //`----+----+----+--+-+----+----+----/    \----+----+----+----+----+----+----'
@@ -101,9 +101,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    //,----+----+----+----+----+----.              ,----+----+----+----+----+----.
        F1 , F2 , F3 , F4 , F5 , F6 ,                F7 , F8 , F9 , F10, F11, F12,
    //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-       NO , NO ,    , NO , NO , NO ,                NO , NO , NO ,LCBR,RCBR, NO ,
+       LOM,    ,    ,    ,    ,    ,                NO , NO , NO ,LCBR,RCBR, NO ,
    //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-       LOM, NO , NO , NO , NO , NO ,                AE ,OSLH,ARNG,LBRC,RBRC, NO ,
+          , NO , NO , NO , NO , NO ,                AE ,OSLH,ARNG,LBRC,RBRC,    ,
    //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
       MRWD,MSTP,MPLY,MFFD, NO , NO,  NO ,      NO , NO , NO ,MUTE,VOLD,VOLU, NO ,
    //`----+----+----+--+-+----+----+----/    \----+----+----+----+----+----+----'
@@ -114,9 +114,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    //,----+----+----+----+----+----.              ,----+----+----+----+----+----.
        F1 , F2 , F3 , F4 , F5 , F6 ,                F7 , F8 , F9 , F10, F11, F12,
    //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-       NO , NO , NO , NO , NO , NO ,                NO , NO , NO ,    ,RCBR, NO ,
+       LOM, NO , NO , NO , NO , NO ,                   ,    ,    ,    ,    , NO ,
    //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-       LOM, NO , NO , NO , NO , NO ,                AE ,OSLH,ARNG,LBRC,RBRC, NO ,
+          , NO , NO , NO , NO , NO ,                AE ,OSLH,ARNG,LBRC,RBRC,    ,
    //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
       MRWD,MSTP,MPLY,MFFD, NO , NO,  NO ,      NO , NO , NO ,MUTE,VOLD,VOLU, NO ,
    //`----+----+----+--+-+----+----+----/    \----+----+----+----+----+----+----'
