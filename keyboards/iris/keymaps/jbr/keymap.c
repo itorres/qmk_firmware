@@ -15,7 +15,8 @@ enum iris_keycodes {
   KC_LOM = SAFE_RANGE, // Switch default layer between MAC og LINUX
   KC_AE, // Danish AE
   KC_OSLH,// Danish OSLASH
-  KC_ARNG // Danish ARING
+  KC_ARNG, // Danish ARING
+  KC_LAY // Print layout URL
 };
 
 #define KC_ KC_TRNS
@@ -37,6 +38,9 @@ enum iris_keycodes {
 // ALT
 #define KC_ALG MT(MOD_LALT, KC_G)
 #define KC_ALH MT(MOD_RALT, KC_H)
+// SHIFT
+#define KC_STAB MT(MOD_LSFT, KC_TAB)
+#define KC_SBSP MT(MOD_RSFT, KC_BSPC)
 // UPPER LAYER
 #define KC_ULD LT(RAISELEFT, KC_D)
 #define KC_ULK LT(RAISERIGHT, KC_K)
@@ -47,11 +51,11 @@ enum iris_keycodes {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [MAC] = LAYOUT_kc(
    //,----+----+----+----+----+----.              ,----+----+----+----+----+----.
-       TAB, Q  , W  , E  , R  , T  ,                Y  , U  , I  , O  , P  ,BSPC,
+       ESC, Q  , W  , E  , R  , T  ,                Y  , U  , I  , O  , P  , DEL,
    //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-       ESC, MGA, LLS, ULD, MCF, ALG,                ALH, MCJ, ULK, LLL,MGSC, ENT,
+      STAB, MGA, LLS, ULD, MCF, ALG,                ALH, MCJ, ULK, LLL,MGSC,SBSP,
    //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-      LSFT, Z  , X  , C  , V  , B  ,                N  , M  ,COMM, DOT,SLSH,RSFT,
+       NO , Z  , X  , C  , V  , B  ,                N  , M  ,COMM, DOT,SLSH, ENT,
    //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
       HOME,PGDN,PGUP, END, NO ,SPC , NO ,      NO , SPC, NO ,LEFT,DOWN, UP ,RGHT,
    //`----+----+----+--+-+----+----+----/    \----+----+----+----+----+----+----'
@@ -73,37 +77,37 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [RAISELEFT] = LAYOUT_kc(
    //,----+----+----+----+----+----.              ,----+----+----+----+----+----.
-       NO ,EXLM, AT ,HASH, DLR,PERC,               CIRC,AMPR,ASTR,LPRN,RPRN, DEL,
+       F1 , F2 , F3 , F4 , F5 , F6 ,                F7 , F8 , F9 , F10, F11, F12,
    //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-       NO ,    ,    ,    ,    ,    ,                6  , 7  , 8  , 9  , 0  , NO ,
+          ,    ,    ,    ,    ,    ,                6  , 7  , 8  , 9  , 0  , NO ,
    //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-          , DQT,QUOT, GRV,TILD,PIPE,               PLUS,MINS, EQL,UNDS,BSLS,    ,
+       NO , NO , NO , NO , NO , NO ,                NO , NO , NO , NO , NO , NO ,
    //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
-       NO , NO , NO , NO , NO , NO , NO ,      NO , NO , NO , NO , NO , NO , NO ,
+       LOM, NO , NO , NO , NO , NO , NO ,      NO , NO , NO , NO , NO , NO , LAY,
    //`----+----+----+--+-+----+----+----/    \----+----+----+----+----+----+----'
                           NO , NO , NO ,        NO  , NO , NO
    //                   `----+----+----'       `----+----+----'
   ),
   [RAISERIGHT] = LAYOUT_kc(
    //,----+----+----+----+----+----.              ,----+----+----+----+----+----.
-       NO ,EXLM, AT ,HASH, DLR,PERC,               CIRC,AMPR,ASTR,LPRN,RPRN, DEL,
+       F1 , F2 , F3 , F4 , F5 , F6 ,                F7 , F8 , F9 , F10, F11, F12,
    //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-       NO , 1  , 2  , 3  , 4  , 5  ,                   ,    ,    ,    ,    , NO ,
+       NO , 1  , 2  , 3  , 4  , 5  ,                   ,    ,    ,    ,    ,    ,
    //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-          , DQT,QUOT, GRV,TILD,PIPE,               PLUS,MINS, EQL,UNDS,BSLS,    ,
+       NO , NO , NO , NO , NO , NO ,                NO , NO , NO , NO , NO , NO ,
    //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
-       NO , NO , NO , NO , NO , NO , NO ,      NO , NO , NO , NO , NO , NO , NO ,
+       LOM, NO , NO , NO , NO , NO , NO ,      NO , NO , NO , NO , NO , NO , LAY,
    //`----+----+----+--+-+----+----+----/    \----+----+----+----+----+----+----'
                           NO , NO , NO ,        NO  , NO , NO
    //                   `----+----+----'       `----+----+----'
   ),
   [LOWERLEFT] = LAYOUT_kc(
    //,----+----+----+----+----+----.              ,----+----+----+----+----+----.
-       F1 , F2 , F3 , F4 , F5 , F6 ,                F7 , F8 , F9 , F10, F11, F12,
+       NO , GRV, DQT, NO ,TILD, NO ,               PLUS,MINS, EQL,LBRC,RBRC, NO ,
    //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-       LOM,    ,    ,    ,    ,    ,                NO , NO , NO ,LCBR,RCBR, NO ,
+          ,    ,    ,    ,    ,    ,               CIRC,AMPR,ASTR,LPRN,RPRN, NO ,
    //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-          , NO , NO , NO , NO , NO ,                AE ,OSLH,ARNG,LBRC,RBRC,    ,
+       NO ,BSLS,QUOT,UNDS,PIPE, NO ,               OSLH, AE ,ARNG,LCBR,RCBR, NO ,
    //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
       MRWD,MSTP,MPLY,MFFD, NO , NO,  NO ,      NO , NO , NO ,MUTE,VOLD,VOLU, NO ,
    //`----+----+----+--+-+----+----+----/    \----+----+----+----+----+----+----'
@@ -112,11 +116,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [LOWERRIGHT] = LAYOUT_kc(
    //,----+----+----+----+----+----.              ,----+----+----+----+----+----.
-       F1 , F2 , F3 , F4 , F5 , F6 ,                F7 , F8 , F9 , F10, F11, F12,
+       NO , GRV, DQT, NO ,TILD, NO ,               PLUS,MINS, EQL,LBRC,RBRC, NO ,
    //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-       LOM, NO , NO , NO , NO , NO ,                   ,    ,    ,    ,    , NO ,
+       NO ,EXLM, AT ,HASH, DLR,PERC,                   ,    ,    ,    ,    ,    ,
    //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-          , NO , NO , NO , NO , NO ,                AE ,OSLH,ARNG,LBRC,RBRC,    ,
+       NO ,BSLS,QUOT,UNDS,PIPE, NO ,               OSLH, AE ,ARNG,LCBR,RCBR, NO ,
    //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
       MRWD,MSTP,MPLY,MFFD, NO , NO,  NO ,      NO , NO , NO ,MUTE,VOLD,VOLU, NO ,
    //`----+----+----+--+-+----+----+----/    \----+----+----+----+----+----+----'
@@ -125,64 +129,37 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   )
 };
 
-#define KC_LOSL RALT(KC_L)
-#define KC_LAE  RALT(KC_Z)
-#define KC_LARG RALT(KC_W)
-
-#define KC_MOSL RALT(KC_O)
-#define KC_MAE  RALT(KC_QUOT)
-#define KC_MARG RALT(KC_A)
-
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   uint32_t layer_state;
 
   // Use current layer to send correct keycode for Danish letters
-  switch (keycode) {
-    case KC_AE:
-      if (record->event.pressed) {
-        register_code(KC_RALT);
-        layer_state_is(LINUX) ? register_code(KC_Z) : register_code(KC_QUOT);
-      } else {
-        unregister_code(KC_RALT);
-        layer_state_is(LINUX) ? unregister_code(KC_Z) : unregister_code(KC_QUOT);
-      }
-      return false;
-      break;
-    case KC_OSLH:
-      if (record->event.pressed) {
-        register_code(KC_RALT);
-        layer_state_is(LINUX) ? register_code(KC_L) : register_code(KC_O);
-      } else {
-        unregister_code(KC_RALT);
-        layer_state_is(LINUX) ? unregister_code(KC_L) : unregister_code(KC_O);
-      }
-      return false;
-      break;
-    case KC_ARNG:
-      if (record->event.pressed) {
-        register_code(KC_RALT);
-        layer_state_is(LINUX) ? register_code(KC_W) : register_code(KC_A);
-      } else {
-        unregister_code(KC_RALT);
-        layer_state_is(LINUX) ? unregister_code(KC_W) : unregister_code(KC_A);
-      }
-      return false;
-      break;
-    // Toggle between MAC and LINUX layouts
-    case KC_LOM:
-      if (record->event.pressed) {
-        if(layer_state_is(LINUX)) {
-          layer_state = (1UL << MAC);
-        }
-        else {
-          layer_state = (1UL << MAC) | (1UL << LINUX);
-        }
+  if (record->event.pressed) {
+    switch (keycode) {
+      case KC_AE:
+        layer_state_is(LINUX) ? SEND_STRING(SS_RALT("z")) : SEND_STRING(SS_RALT("\""));
+        return false;
+        break;
+      case KC_OSLH:
+        layer_state_is(LINUX) ? SEND_STRING(SS_RALT("l")) : SEND_STRING(SS_RALT("o"));
+        return false;
+        break;
+      case KC_ARNG:
+        layer_state_is(LINUX) ? SEND_STRING(SS_RALT("w")) : SEND_STRING(SS_RALT("a"));
+        return false;
+        break;
+        // Toggle between MAC and LINUX layouts
+      case KC_LAY:
+        SEND_STRING("http://www.keyboard-layout-editor.com/#/gists/02e24edc4a606f3bd42e12cd3ae656c5"SS_TAP(X_ENTER));
+        return false;
+        break;
+      case KC_LOM:
+        layer_state = layer_state_is(LINUX) ? (1UL << MAC) : (1UL << MAC) | (1UL << LINUX);
         default_layer_set(layer_state);
         layer_state_set(layer_state);
         eeconfig_update_default_layer(layer_state);
-      }
-      return false;
-      break;
+        return false;
+        break;
+    }
   }
   return true;
 }
