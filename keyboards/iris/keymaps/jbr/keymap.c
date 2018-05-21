@@ -13,6 +13,7 @@ enum iris_layers {
 
 enum iris_keycodes {
   KC_LOM = SAFE_RANGE, // Switch default layer between MAC og LINUX
+  KC_LST, // Print layer state
   KC_AE, // Danish AE
   KC_OSLH,// Danish OSLASH
   KC_ARNG, // Danish ARING
@@ -96,7 +97,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    //|----+----+----+----+----+----|              |----+----+----+----+----+----|
        NO , NO , NO , NO , NO , NO ,                   ,    ,    ,    ,    ,    ,
    //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
-       LOM, NO , NO , NO , NO , NO , NO ,      NO , NO , NO , NO , NO , NO , LAY,
+       LOM, LST, NO , NO , NO , NO , NO ,      NO , NO , NO , NO , NO , NO , LAY,
    //`----+----+----+--+-+----+----+----/    \----+----+----+----+----+----+----'
                           NO , NO , NO ,        NO  , NO , NO
    //                   `----+----+----'       `----+----+----'
@@ -157,6 +158,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         default_layer_set(layer_state);
         layer_state_set(layer_state);
         eeconfig_update_default_layer(layer_state);
+        return false;
+        break;
+        // Print which layer is one
+      case KC_LST:
+        layer_state_is(LINUX) ? SEND_STRING("LINUX") : SEND_STRING("MAC");
         return false;
         break;
     }
