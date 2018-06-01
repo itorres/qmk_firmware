@@ -28,8 +28,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 /* Select hand configuration */
 #define MASTER_LEFT
 
-#define TAPPING_TERM 150
-#define PERMISSIVE_HOLD
-
+#define IGNORE_MOD_TAP_INTERRUPT
+#define TAPPING_FORCE_HOLD
+#define PREVENT_STUCK_MODIFIERS
 
 #endif
