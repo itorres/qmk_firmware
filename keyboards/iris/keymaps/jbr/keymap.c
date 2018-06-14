@@ -3,8 +3,9 @@
 #include "eeconfig.h"
 
 enum iris_layers {
-  MAC = 0,
+  DEFAULT = 0,
   LINUX,
+  MAC,
   RAISELEFT,
   RAISERIGHT,
   LOWERLEFT,
@@ -40,7 +41,7 @@ enum iris_keycodes {
 #define KC_ALB MT(MOD_LALT, KC_B)
 #define KC_ALN MT(MOD_RALT, KC_N)
 // SHIFT
-#define KC_SNO KC_LSFT
+#define KC_SSPC MT(MOD_LSFT, KC_SPC)
 #define KC_SENT MT(MOD_RSFT, KC_ENT)
 // UPPER LAYER
 #define KC_ULC LT(RAISELEFT, KC_C)
@@ -50,15 +51,15 @@ enum iris_keycodes {
 #define KC_LLDO LT(LOWERRIGHT, KC_DOT)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-  [MAC] = LAYOUT_kc(
+  [DEFAULT] = LAYOUT_kc(
    //,----+----+----+----+----+----.              ,----+----+----+----+----+----.
-       ESC, Q  , W  , E  , R  , T  ,                Y  , U  , I  , O  , P  , DEL,
+       TAB, Q  , W  , E  , R  , T  ,                Y  , U  , I  , O  , P  , DEL,
    //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-       TAB, A  , S  , D  , F  , G  ,                H  , J  , K  , L  ,SCLN,BSPC,
+       ESC, A  , S  , D  , F  , G  ,                H  , J  , K  , L  ,SCLN,BSPC,
    //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-       SNO, MGZ, LLX, ULC, MCV, ALB,                ALN, MCM,ULCO,LLDO,MGSH,SENT,
+      BSLS, NO , LLX, ULC, NO , ALB,                ALN, NO ,ULCO,LLDO, NO ,MINS,
    //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
-      HOME,PGDN,PGUP, END, NO ,SPC , NO ,      NO , SPC, NO ,LEFT,DOWN, UP ,RGHT,
+      HOME,PGDN,PGUP, END, NO ,SSPC, NO ,      NO ,SENT, NO ,LEFT,DOWN, UP ,RGHT,
    //`----+----+----+--+-+----+----+----/    \----+----+----+----+----+----+----'
                           NO , NO , NO ,         NO , NO , NO
    //                   `----+----+----'       `----+----+----'
@@ -76,56 +77,69 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                              ,    ,    ,            ,    ,
    //                   `----+----+----'       `----+----+----'
   ),
+  [MAC] = LAYOUT_kc(
+   //,----+----+----+----+----+----.              ,----+----+----+----+----+----.
+          ,    ,    ,    ,    ,    ,                   ,    ,    ,    ,    ,    ,
+   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
+          ,    ,    ,    ,    ,    ,                   ,    ,    ,    ,    ,    ,
+   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
+          , MGZ,    ,    , MCV,    ,                   , MCM,    ,    ,MGSH,    ,
+   //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
+          ,    ,    ,    ,    ,    ,    ,         ,    ,    ,    ,    ,    ,    ,
+   //`----+----+----+--+-+----+----+----/    \----+----+----+----+----+----+----'
+                             ,    ,    ,            ,    ,
+   //                   `----+----+----'       `----+----+----'
+  ),
   [RAISELEFT] = LAYOUT_kc(
    //,----+----+----+----+----+----.              ,----+----+----+----+----+----.
-       F1 , F2 , F3 , F4 , F5 , F6 ,                F7 , F8 , F9 , F10, F11, F12,
+       NO , GRV, AT ,TILD, NO , NO ,                NO ,PLUS, EQL,LBRC,RBRC,ARNG,
    //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-       NO , 1  , 2  , 3  , 4  , 5  ,                6  , 7  , 8  , 9  , 0  , NO ,
+       NO ,EXLM, DQT,HASH, DLR,PERC,               CIRC,AMPR,ASTR,LPRN,RPRN,OSLH,
    //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-          ,    ,    ,    ,    ,    ,                NO , NO , NO , NO , NO , NO ,
+       NO ,    ,    ,    ,    ,    ,                NO , NO , NO ,LCBR,RCBR, AE ,
    //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
-       LOM, NO , NO , NO , NO , NO , NO ,      NO , NO , NO , NO , NO , NO , LAY,
+      MRWD,MSTP,MPLY,MFFD, NO ,   ,  NO ,      NO , NO , NO ,MUTE,VOLD,VOLU, NO ,
    //`----+----+----+--+-+----+----+----/    \----+----+----+----+----+----+----'
-                          NO , NO , NO ,        NO  , NO , NO
+                          NO , NO , NO ,         NO , NO , NO
    //                   `----+----+----'       `----+----+----'
   ),
   [RAISERIGHT] = LAYOUT_kc(
    //,----+----+----+----+----+----.              ,----+----+----+----+----+----.
-       F1 , F2 , F3 , F4 , F5 , F6 ,                F7 , F8 , F9 , F10, F11, F12,
+       NO , GRV, AT ,TILD, NO , NO ,                NO ,PLUS, EQL,LBRC,RBRC,ARNG,
    //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-       NO , 1  , 2  , 3  , 4  , 5  ,                6  , 7  , 8  , 9  , 0  , NO ,
+       NO ,EXLM, DQT,HASH, DLR,PERC,               CIRC,AMPR,ASTR,LPRN,RPRN,OSLH,
    //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-       NO , NO , NO , NO , NO , NO ,                   ,    ,    ,    ,    ,    ,
+       NO , NO ,QUOT, NO , NO , NO ,                   ,    ,    ,    ,    , AE ,
    //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
-       LOM, LST, NO , NO , NO , NO , NO ,      NO , NO , NO , NO , NO , NO , LAY,
+      MRWD,MSTP,MPLY,MFFD, NO , NO,  NO ,      NO ,    , NO ,MUTE,VOLD,VOLU, NO ,
    //`----+----+----+--+-+----+----+----/    \----+----+----+----+----+----+----'
-                          NO , NO , NO ,        NO  , NO , NO
+                          NO , NO , NO ,         NO , NO , NO
    //                   `----+----+----'       `----+----+----'
   ),
   [LOWERLEFT] = LAYOUT_kc(
    //,----+----+----+----+----+----.              ,----+----+----+----+----+----.
-       NO , GRV, DQT, NO ,TILD, NO ,               PLUS,MINS, EQL,LBRC,RBRC, NO ,
+       F1 , F2 , F3 , F4 , F5 , F6 ,                F7 , F8 , F9 , F10, F11, F12,
    //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-       NO ,EXLM, AT ,HASH, DLR,PERC,               CIRC,AMPR,ASTR,LPRN,RPRN, NO ,
+       NO , 1  , 2  , 3  , 4  , 5  ,                6  , 7  , 8  , 9  , 0  , NO ,
    //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-          ,    ,    ,    ,    ,    ,               OSLH, AE ,ARNG,LCBR,RCBR, NO ,
+       NO ,    ,    ,    ,    ,    ,                NO , NO , NO , NO , NO , NO ,
    //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
-      MRWD,MSTP,MPLY,MFFD, NO , NO,  NO ,      NO , NO , NO ,MUTE,VOLD,VOLU, NO ,
+       LOM, NO , NO , NO , NO ,    , NO ,      NO , NO, NO , NO , NO , NO , LAY,
    //`----+----+----+--+-+----+----+----/    \----+----+----+----+----+----+----'
-                          NO , NO , NO ,         NO , NO , NO
+                          NO , NO , NO ,        NO  , NO , NO
    //                   `----+----+----'       `----+----+----'
   ),
   [LOWERRIGHT] = LAYOUT_kc(
    //,----+----+----+----+----+----.              ,----+----+----+----+----+----.
-       NO , GRV, DQT, NO ,TILD, NO ,               PLUS,MINS, EQL,LBRC,RBRC, NO ,
+       F1 , F2 , F3 , F4 , F5 , F6 ,                F7 , F8 , F9 , F10, F11, F12,
    //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-       NO ,EXLM, AT ,HASH, DLR,PERC,               CIRC,AMPR,ASTR,LPRN,RPRN, NO ,
+       NO , 1  , 2  , 3  , 4  , 5  ,                6  , 7  , 8  , 9  , 0  , NO ,
    //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-       NO ,BSLS,QUOT,UNDS,PIPE, NO ,                   ,    ,    ,    ,    ,    ,
+       NO , NO , NO , NO , NO , NO ,                   ,    ,    ,    ,    , NO ,
    //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
-      MRWD,MSTP,MPLY,MFFD, NO , NO,  NO ,      NO , NO , NO ,MUTE,VOLD,VOLU, NO ,
+       LOM, LST, NO , NO , NO , NO , NO ,      NO ,    , NO , NO , NO , NO , LAY,
    //`----+----+----+--+-+----+----+----/    \----+----+----+----+----+----+----'
-                          NO , NO , NO ,         NO , NO , NO
+                          NO , NO , NO ,        NO  , NO , NO
    //                   `----+----+----'       `----+----+----'
   )
 };
@@ -151,15 +165,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         // Show keyboard layout in new tab in browser
       case KC_LAY:
         if(layer_state_is(LINUX)) {
-          SEND_STRING(SS_LCTRL("t")"http://www.keyboard-layout-editor.com/#/gists/02e24edc4a606f3bd42e12cd3ae656c5"SS_TAP(X_ENTER));
+          SEND_STRING(SS_LCTRL("t")"http://www.keyboard-layout-editor.com/#/gists/a5b0ab213362103dcd2cda16c42f0a0e"SS_TAP(X_ENTER));
         } else {
-          SEND_STRING(SS_LGUI("t")"http://www.keyboard-layout-editor.com/#/gists/02e24edc4a606f3bd42e12cd3ae656c5"SS_TAP(X_ENTER));
+          SEND_STRING(SS_LGUI("t")"http://www.keyboard-layout-editor.com/#/gists/a5b0ab213362103dcd2cda16c42f0a0e"SS_TAP(X_ENTER));
         }
         return false;
         break;
       case KC_LOM:
         // Toggle between MAC and LINUX layouts
-        layer_state = layer_state_is(LINUX) ? (1UL << MAC) : (1UL << MAC) | (1UL << LINUX);
+        layer_state = DEFAULT | layer_state_is(LINUX) ? (1UL << MAC) : (1UL << LINUX);
         default_layer_set(layer_state);
         layer_state_set(layer_state);
         eeconfig_update_default_layer(layer_state);
@@ -167,7 +181,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         break;
         // Print which OS layer is on
       case KC_LST:
-        layer_state_is(LINUX) ? SEND_STRING("LINUX") : SEND_STRING("MAC");
+        layer_state_is(MAC) ? SEND_STRING("MAC") : SEND_STRING("LINUX");
         return false;
         break;
     }
