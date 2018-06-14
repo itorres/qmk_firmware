@@ -148,19 +148,24 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         layer_state_is(LINUX) ? SEND_STRING(SS_RALT("w")) : SEND_STRING(SS_RALT("a"));
         return false;
         break;
-        // Toggle between MAC and LINUX layouts
+        // Show keyboard layout in new tab in browser
       case KC_LAY:
-        SEND_STRING("http://www.keyboard-layout-editor.com/#/gists/02e24edc4a606f3bd42e12cd3ae656c5"SS_TAP(X_ENTER));
+        if(layer_state_is(LINUX)) {
+          SEND_STRING(SS_LCTRL("t")"http://www.keyboard-layout-editor.com/#/gists/02e24edc4a606f3bd42e12cd3ae656c5"SS_TAP(X_ENTER));
+        } else {
+          SEND_STRING(SS_LGUI("t")"http://www.keyboard-layout-editor.com/#/gists/02e24edc4a606f3bd42e12cd3ae656c5"SS_TAP(X_ENTER));
+        }
         return false;
         break;
       case KC_LOM:
+        // Toggle between MAC and LINUX layouts
         layer_state = layer_state_is(LINUX) ? (1UL << MAC) : (1UL << MAC) | (1UL << LINUX);
         default_layer_set(layer_state);
         layer_state_set(layer_state);
         eeconfig_update_default_layer(layer_state);
         return false;
         break;
-        // Print which layer is one
+        // Print which OS layer is on
       case KC_LST:
         layer_state_is(LINUX) ? SEND_STRING("LINUX") : SEND_STRING("MAC");
         return false;
