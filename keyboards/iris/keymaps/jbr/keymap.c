@@ -59,7 +59,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    //|----+----+----+----+----+----|              |----+----+----+----+----+----|
       BSLS, NO , LLX, ULC, NO , ALB,                ALN, NO ,ULCO,LLDO, NO ,MINS,
    //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
-      HOME,PGDN,PGUP, END, NO ,SSPC, NO ,      NO ,SENT, NO ,LEFT,DOWN, UP ,RGHT,
+      HOME,PGDN,PGUP, END, NO ,SENT, NO ,      NO ,SSPC, NO ,LEFT,DOWN, UP ,RGHT,
    //`----+----+----+--+-+----+----+----/    \----+----+----+----+----+----+----'
                           NO , NO , NO ,         NO , NO , NO
    //                   `----+----+----'       `----+----+----'
