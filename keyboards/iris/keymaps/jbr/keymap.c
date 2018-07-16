@@ -13,29 +13,28 @@ enum iris_layers {
 };
 
 enum iris_keycodes {
-  KC_LOM = SAFE_RANGE, // Switch default layer between MAC og LINUX
-  KC_LST, // Print layer state
-  KC_AE, // Danish AE
-  KC_OSLH,// Danish OSLASH
-  KC_ARNG, // Danish ARING
-  KC_LAY // Print layout URL
+  KC_AE = SAFE_RANGE, // Danish AE
+  KC_OSLH,            // Danish OSLASH
+  KC_ARNG,            // Danish ARING
+  KC_CHKM,            // Change keymap
+  KC_LAY              // Print layout URL
 };
 
 #define KC_ KC_TRNS
 
 // MAC GUI
-#define KC_MGZ MT(MOD_LGUI, KC_Z)
-#define KC_MGSH MT(MOD_RGUI, KC_SLSH)
+#define KC_MZM MT(MOD_LGUI, KC_Z)
+#define KC_MSLM MT(MOD_RGUI, KC_SLSH)
 // MAC CTRL
-#define KC_MCV MT(MOD_LCTL, KC_V)
-#define KC_MCM MT(MOD_RCTL, KC_M)
+#define KC_MVM MT(MOD_LCTL, KC_V)
+#define KC_MMM MT(MOD_RCTL, KC_M)
 
 // LINUX GUI
-#define KC_LGV MT(MOD_LGUI, KC_V)
-#define KC_LGM MT(MOD_RGUI, KC_M)
+#define KC_MVL MT(MOD_LGUI, KC_V)
+#define KC_MML MT(MOD_RGUI, KC_M)
 // LINUX CTRL
-#define KC_LCZ MT(MOD_LCTL, KC_Z)
-#define KC_LCSH MT(MOD_RCTL, KC_SLSH)
+#define KC_MZL MT(MOD_LCTL, KC_Z)
+#define KC_MSLL MT(MOD_RCTL, KC_SLSH)
 
 // ALT
 #define KC_ALB MT(MOD_LALT, KC_B)
@@ -70,7 +69,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    //|----+----+----+----+----+----|              |----+----+----+----+----+----|
           ,    ,    ,    ,    ,    ,                   ,    ,    ,    ,    ,    ,
    //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-          , LCZ,    ,    , LGV,    ,                   , LGM,    ,    ,LCSH,    ,
+          , MZL,    ,    , MVL,    ,                   , MML,    ,    ,MSLL,    ,
    //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
           ,    ,    ,    ,    ,    ,    ,         ,    ,    ,    ,    ,    ,    ,
    //`----+----+----+--+-+----+----+----/    \----+----+----+----+----+----+----'
@@ -83,7 +82,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    //|----+----+----+----+----+----|              |----+----+----+----+----+----|
           ,    ,    ,    ,    ,    ,                   ,    ,    ,    ,    ,    ,
    //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-          , MGZ,    ,    , MCV,    ,                   , MCM,    ,    ,MGSH,    ,
+          , MZM,    ,    , MVM,    ,                   , MMM,    ,    ,MSLM,    ,
    //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
           ,    ,    ,    ,    ,    ,    ,         ,    ,    ,    ,    ,    ,    ,
    //`----+----+----+--+-+----+----+----/    \----+----+----+----+----+----+----'
@@ -124,7 +123,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    //|----+----+----+----+----+----|              |----+----+----+----+----+----|
        NO ,    ,    ,    ,    ,    ,                NO , NO , NO , NO , NO , NO ,
    //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
-       LOM, NO , NO , NO , NO ,    , NO ,      NO , NO, NO , NO , NO , NO , LAY,
+      CHKM, NO , NO , NO , NO ,    , NO ,      NO , NO , NO , NO , NO , NO , LAY ,
    //`----+----+----+--+-+----+----+----/    \----+----+----+----+----+----+----'
                           NO , NO , NO ,        NO  , NO , NO
    //                   `----+----+----'       `----+----+----'
@@ -137,7 +136,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    //|----+----+----+----+----+----|              |----+----+----+----+----+----|
        NO , NO , NO , NO , NO , NO ,                   ,    ,    ,    ,    , NO ,
    //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
-       LOM, LST, NO , NO , NO , NO , NO ,      NO ,    , NO , NO , NO , NO , LAY,
+      CHKM, NO , NO , NO , NO , NO , NO ,      NO ,    , NO , NO , NO , NO , NO ,
    //`----+----+----+--+-+----+----+----/    \----+----+----+----+----+----+----'
                           NO , NO , NO ,        NO  , NO , NO
    //                   `----+----+----'       `----+----+----'
@@ -145,46 +144,47 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  uint32_t layer_state;
+  // Fetch keymap from eeprom
+  uint8_t keymap = eeconfig_read_keymap();
 
-  // Use current layer to send correct keycode for Danish letters
   if (record->event.pressed) {
     switch (keycode) {
       case KC_AE:
-        layer_state_is(LINUX) ? SEND_STRING(SS_RALT("z")) : SEND_STRING(SS_RALT("\""));
+        keymap == LINUX ? SEND_STRING(SS_RALT("z")) : SEND_STRING(SS_RALT("\""));
         return false;
-        break;
       case KC_OSLH:
-        layer_state_is(LINUX) ? SEND_STRING(SS_RALT("l")) : SEND_STRING(SS_RALT("o"));
+        keymap == LINUX ? SEND_STRING(SS_RALT("l")) : SEND_STRING(SS_RALT("o"));
         return false;
-        break;
       case KC_ARNG:
-        layer_state_is(LINUX) ? SEND_STRING(SS_RALT("w")) : SEND_STRING(SS_RALT("a"));
+        keymap == LINUX ? SEND_STRING(SS_RALT("w")) : SEND_STRING(SS_RALT("a"));
         return false;
-        break;
-        // Show keyboard layout in new tab in browser
       case KC_LAY:
-        if(layer_state_is(LINUX)) {
+        // Show keyboard layout in new tab in browser
+        if (keymap == LINUX) {
           SEND_STRING(SS_LCTRL("t")"http://www.keyboard-layout-editor.com/#/gists/a5b0ab213362103dcd2cda16c42f0a0e"SS_TAP(X_ENTER));
         } else {
           SEND_STRING(SS_LGUI("t")"http://www.keyboard-layout-editor.com/#/gists/a5b0ab213362103dcd2cda16c42f0a0e"SS_TAP(X_ENTER));
         }
         return false;
-        break;
-      case KC_LOM:
-        // Toggle between MAC and LINUX layouts
-        layer_state = DEFAULT | layer_state_is(LINUX) ? (1UL << MAC) : (1UL << LINUX);
-        default_layer_set(layer_state);
-        layer_state_set(layer_state);
-        eeconfig_update_default_layer(layer_state);
+      case KC_CHKM:
+        layer_off(keymap);
+        keymap = keymap == LINUX ? MAC : LINUX;
+        eeconfig_update_keymap(keymap);
+        layer_on(keymap);
         return false;
-        break;
-        // Print which OS layer is on
-      case KC_LST:
-        layer_state_is(MAC) ? SEND_STRING("MAC") : SEND_STRING("LINUX");
-        return false;
-        break;
     }
   }
   return true;
+}
+
+void matrix_init_user(void) {
+  // Fetch keymap from eeprom
+  uint8_t keymap = eeconfig_read_keymap();
+  // If keymap has never been set, write default keymap to eeprom
+  if (keymap == 0) {
+    keymap = LINUX;
+    eeconfig_update_keymap(keymap);
+  }
+  // Turn on keymap from eeprom
+  layer_on(keymap);
 }
