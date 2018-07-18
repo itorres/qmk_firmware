@@ -9,7 +9,10 @@ enum iris_layers {
   RAISELEFT,
   RAISERIGHT,
   LOWERLEFT,
-  LOWERRIGHT
+  LOWERRIGHT,
+  NUMPAD,
+  NUMPADLINUX,
+  NUMPADMAC
 };
 
 enum iris_keycodes {
@@ -25,6 +28,7 @@ enum iris_keycodes {
 // MAC GUI
 #define KC_MZM MT(MOD_LGUI, KC_Z)
 #define KC_MSLM MT(MOD_RGUI, KC_SLSH)
+#define KC_M2M MT(MOD_LGUI, KC_2)
 // MAC CTRL
 #define KC_MVM MT(MOD_LCTL, KC_V)
 #define KC_MMM MT(MOD_RCTL, KC_M)
@@ -35,6 +39,7 @@ enum iris_keycodes {
 // LINUX CTRL
 #define KC_MZL MT(MOD_LCTL, KC_Z)
 #define KC_MSLL MT(MOD_RCTL, KC_SLSH)
+#define KC_M2L MT(MOD_LCTL, KC_2)
 
 // ALT
 #define KC_ALB MT(MOD_LALT, KC_B)
@@ -123,7 +128,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    //|----+----+----+----+----+----|              |----+----+----+----+----+----|
        NO ,    ,    ,    ,    ,    ,                NO , NO , NO , NO , NO , NO ,
    //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
-      CHKM, NO , NO , NO , NO ,    , NO ,      NO ,    , NO , NO , NO , NO , LAY ,
+      CHKM, NO , NO , NO , NO ,    , NO ,      NO ,    , NO , NO ,NLCK, NO , LAY,
    //`----+----+----+--+-+----+----+----/    \----+----+----+----+----+----+----'
                           NO , NO , NO ,        NO  , NO , NO
    //                   `----+----+----'       `----+----+----'
@@ -136,11 +141,50 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    //|----+----+----+----+----+----|              |----+----+----+----+----+----|
        NO , NO , NO , NO , NO , NO ,                   ,    ,    ,    ,    , NO ,
    //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
-      CHKM, NO , NO , NO , NO ,    , NO ,      NO ,    , NO , NO , NO , NO , NO ,
+      CHKM, NO , NO , NO , NO ,    , NO ,      NO ,    , NO , NO ,NLCK, NO , NO ,
    //`----+----+----+--+-+----+----+----/    \----+----+----+----+----+----+----'
                           NO , NO , NO ,        NO  , NO , NO
    //                   `----+----+----'       `----+----+----'
-  )
+  ),
+  [NUMPAD] = LAYOUT_kc(
+   //,----+----+----+----+----+----.              ,----+----+----+----+----+----.
+       7  , 8  , 9  ,PPLS,PMNS, DEL,                NO , NO , NO , NO , NO , NO ,
+   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
+       4  , 5  , 6  ,PAST,PSLS,BSPC,               LEFT,DOWN, UP ,RGHT, NO , NO ,
+   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
+       1  , NO , 3  ,PEQL, NO ,LALT,                NO , NO , NO , NO , NO , NO ,
+   //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
+       0  ,COMM,DOT ,COLN, ENT,SSPC, NO ,      NO , NO , NO , NO ,NLCK, NO , NO ,
+   //`----+----+----+--+-+----+----+----/    \----+----+----+----+----+----+----'
+                          NO , NO , NO ,         NO , NO , NO
+   //                   `----+----+----'       `----+----+----'
+  ),
+  [NUMPADLINUX] = LAYOUT_kc(
+   //,----+----+----+----+----+----.              ,----+----+----+----+----+----.
+          ,    ,    ,    ,    ,    ,                   ,    ,    ,    ,    ,    ,
+   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
+          ,    ,    ,    ,    ,    ,                   ,    ,    ,    ,    ,    ,
+   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
+          ,M2L ,    ,    ,LGUI,    ,                   ,    ,    ,    ,    ,    ,
+   //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
+          ,    ,    ,    ,    ,    ,    ,         ,    ,    ,    ,    ,    ,    ,
+   //`----+----+----+--+-+----+----+----/    \----+----+----+----+----+----+----'
+                             ,    ,    ,            ,    ,
+   //                   `----+----+----'       `----+----+----'
+  ),
+  [NUMPADMAC] = LAYOUT_kc(
+   //,----+----+----+----+----+----.              ,----+----+----+----+----+----.
+          ,    ,    ,    ,    ,    ,                   ,    ,    ,    ,    ,    ,
+   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
+          ,    ,    ,    ,    ,    ,                   ,    ,    ,    ,    ,    ,
+   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
+          ,M2M ,    ,    ,LCTL,    ,                   ,    ,    ,    ,    ,    ,
+   //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
+          ,    ,    ,    ,    ,    ,    ,         ,    ,    ,    ,    ,    ,    ,
+   //`----+----+----+--+-+----+----+----/    \----+----+----+----+----+----+----'
+                             ,    ,    ,            ,    ,
+   //                   `----+----+----'       `----+----+----'
+   )
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -171,6 +215,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         keymap = keymap == LINUX ? MAC : LINUX;
         eeconfig_update_keymap(keymap);
         layer_on(keymap);
+        return false;
+      case KC_NLCK:
+        if (layer_state_is(NUMPAD)) {
+          layer_off(NUMPAD + keymap);
+          layer_off(NUMPAD);
+        } else {
+          layer_on(NUMPAD);
+          layer_on(NUMPAD + keymap);
+        }
         return false;
     }
   }
